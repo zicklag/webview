@@ -8,9 +8,7 @@ jobs:
       - uses: actions/checkout@v1
       - name: Build and run tests
         run: ./script/build.bat
-      - name: GitHub Releases
-        uses: fnkr/github-action-ghr@v1.3
-        env:
-          GHR_COMPRESS: xz
-          GHR_PATH: ./
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/upload-artifact@v2
+        with:
+          name: built
+          path: .

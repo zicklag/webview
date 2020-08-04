@@ -1,0 +1,16 @@
+name: CI Pipeline
+on: [push, pull_request, workflow_dispatch]
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Build and run tests
+        run: ./script/build.bat
+      - name: GitHub Releases
+        uses: fnkr/github-action-ghr@v1.3
+        env:
+          GHR_COMPRESS: xz
+          GHR_PATH: ./
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
